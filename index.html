@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player</title>
+  <link rel="stylesheet" href="player.css">
+</head>
+<body>
+  
+
+
+</div>
+
+  <div class="player">
+
+    <div class="capa">🎧</div>
+
+
+    <p class="nome">Construção</p>
+    <p class="artista">Chico Buarque</p>
+
+    <div class="barra">
+      <div class="barra-fill" id="fill"></div>
+    </div>
+    <div class="tempo">
+      <span id="atual">0:00</span>
+      <span>6:24</span>
+    </div>
+
+    <div class="controles">
+      <button class="btn"><</button>
+      <button class="btn btn-play" id="play">▶</button>
+      <button class="btn">></button>
+    </div>
+
+  </div>
+
+  <script>
+    const play = document.getElementById('play');
+    const fill = document.getElementById('fill');
+    const atual = document.getElementById('atual');
+    let tocando = false;
+    let seg = 0;
+    let timer;
+
+    play.addEventListener('click', () => {
+      tocando = !tocando;
+      play.textContent = tocando ? '⏸' : '▶';
+      if (tocando) {
+        timer = setInterval(() => {
+          seg++;
+          if (seg >= 225) seg = 0;
+          fill.style.width = (seg / 225 * 100) + '%';
+          atual.textContent = Math.floor(seg/60) + ':' + String(seg%60).padStart(2,'0');
+        }, 1000);
+      } else {
+        clearInterval(timer);
+      }
+    });
+  </script>
+
+</body>
+</html>
